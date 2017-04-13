@@ -13,7 +13,7 @@ import java.util.List;
 /**
  * @Author:俞竞雄
  * @Description:显示首页的处理器
- * @Date: $date$
+ * @Date: 2017-03-13
  */
 @Controller
 public class IndexController  {
@@ -24,6 +24,13 @@ public class IndexController  {
 
     @RequestMapping("/indexController.action")
     public ModelAndView showItem(@RequestParam(value="ceta")int ceta) throws Exception {
+            /**
+            *   @Description: 根据商品类型ID显示主页信息
+            *   @Author:俞竞雄
+            *   @Param:[ceta] 页面传递过来的一个数字，表示商品类型ID
+            *   @return:org.springframework.web.servlet.ModelAndView
+            *   @Date:2017-03-13
+            */
 
             ModelAndView modelAndView = new ModelAndView();
 
@@ -32,10 +39,15 @@ public class IndexController  {
             //通过该方法判断ceta值所对应的类型名称
             String type = indexServiceIml.getType(ceta);
 
+            //将要显示的数据添加到modelAndView中
+            //返回的商品信息合集
             modelAndView.addObject("goodsItems", list);
+            //返回的商品类型ID
             modelAndView.addObject("returnCeta",ceta);
+            //返回商品类型名称
             modelAndView.addObject("type",type);
 
+            //使用index.jsp页面显示
             modelAndView.setViewName("index");
 
             return modelAndView;
