@@ -24,6 +24,14 @@ public class ValidateCodeServlet extends HttpServlet {
     private static int HEIGHT = 30;
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        /**
+         *   @Description:       创建验证码
+         *   @Author:俞竞雄
+         *   @Param:[request]
+         *   @Param:[response]
+         *   @return:void
+         *   @Date:2017-04-14
+        */
 
         DrawCode drawCode = new DrawCode();
 

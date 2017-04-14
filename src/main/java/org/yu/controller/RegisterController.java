@@ -8,7 +8,7 @@ import org.yu.entity.UserEntity;
 import org.yu.serviceIml.RegisterService;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * @Author:俞竞雄
@@ -22,7 +22,7 @@ public class RegisterController {
     private RegisterService registerService;
 
     @RequestMapping("/register.action")
-    public ModelAndView register(UserEntity register_user, @RequestParam(value="validatePwd")String validatePwd, @RequestParam(value = "validateCode")String inputCode, HttpSession session){
+    public ModelAndView register(UserEntity register_user, @RequestParam(value="validatePwd")String validatePwd, @RequestParam(value = "validateCode")String inputCode, HttpServletRequest request){
         /**
          *   @Description:
          *   @Author:俞竞雄
@@ -68,7 +68,7 @@ public class RegisterController {
             viewName = "/user/register";
         }
         //验证码是否正确
-        else if(!registerService.validateCode((String) session.getAttribute("validateCode"), inputCode))
+        else if(!registerService.validateCode((String) request.getSession().getAttribute("validateCode"), inputCode))
         {
             modelAndView.addObject("validateCodeResult","请输入正确的验证码");
             modelAndView.addObject("emailReult","");
@@ -87,9 +87,10 @@ public class RegisterController {
             modelAndView.addObject("nameResult","");
             viewName = "/user/register";
         }
-        //验证全部通过，将user的信息放到数据库中
+        //验证全部通过，将user的信息放到数据库中,加到session中直接登录
         else
         {
+            registerService.setAutoLogin(register_user, request.getSession());
             registerService.insertUser(register_user);
             viewName = "/index";
         }

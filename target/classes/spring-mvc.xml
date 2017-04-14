@@ -46,4 +46,9 @@
 		<property name="defaultEncoding" value="utf-8" />
 	</bean>
 
+	<!-- 配置拦截器 -->
+	<mvc:interceptors>
+		<bean class="org.yu.interceptor.LoginInterceptor" />
+	</mvc:interceptors>
+
 </beans>

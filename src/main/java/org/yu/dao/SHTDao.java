@@ -4,9 +4,11 @@ import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 import org.yu.entity.GoodsEntity;
+import org.yu.entity.MessageEntity;
 import org.yu.entity.UserEntity;
 import org.yu.utils.MD5Encrypt;
 
@@ -147,5 +149,32 @@ public class SHTDao implements SHTDaoIml {
         }finally {
             session.close();
         }
+    }
+
+    public Integer selectMessageCount(UserEntity user) {
+
+        Transaction transaction = null;
+        Session session = null;
+        Integer messCount = null;
+
+        try{
+            session = sessionFactory.openSession();
+            transaction = session.beginTransaction();
+
+            Criteria criteria = session.createCriteria(MessageEntity.class);
+            criteria.setProjection(Projections.rowCount());
+            Object obj = criteria.uniqueResult();
+
+            Long lobj = (Long) obj;
+            messCount = lobj.intValue();
+
+            transaction.commit();
+        }catch (Exception e){
+            transaction.rollback();
+        }finally {
+            session.close();
+        }
+
+        return messCount;
     }
 }

@@ -1,13 +1,5 @@
-<%@page import="org.apache.el.lang.ELSupport"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ page
-	import="java.sql.*,src.vo.*,src.tools.*,javax.servlet.http.HttpSession,src.dbHandle.*"%>
-<%
-    String path = request.getContextPath();
-    String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
-%>
-<%
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%--<%
 Boolean isMe=false;
 Boolean isLogin=LoginVerify.isLogin(request);
 User me=null;
@@ -33,14 +25,13 @@ if(isLogin){
 }
 
 String tab = request.getParameter("tab");
-%>
+%>--%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<base href="<%=basePath%>">
 <jsp:include page="../site/head.jsp" />
-<title>用户中心 - HfuuShop</title>
+<title>用户中心</title>
 </head>
 <body>
 	<jsp:include page="../site/header.jsp" />
@@ -51,79 +42,35 @@ String tab = request.getParameter("tab");
 					<div class="col-md-12">
 						<div class="list-group">
 							<div class="list-group-item personal-main-info">
-								
-								<img class="img-rounded img-personal-main-info"
-								src="<%=user.getImg() %>" />
-								<div class="row detail-goods text-muted">姓名：<%=user.getName() %></div>
-								<div class="row detail-goods text-muted">邮箱：<%=user.getEmail() %></div>
-								
+								<img class="img-rounded img-personal-main-info" src="/static/user_img/1" />
+								<div class="row detail-goods text-muted">姓名：${user.name}</div>
+								<div class="row detail-goods text-muted">邮箱：${user.email}</div>
 							</div>
-							<a href="user/personal.jsp?tab=info&userid=<%=user.getId() %>" 
-							class="list-group-item <%=tab.equals("info")?"active":"" %>">
-							个人信息</a>
-							
-							<%if(isMe){	
-							%>
-							<%if(LoginVerify.isAdmin(request)){	
-							%>
-							
-							<a href="user/personal.jsp?tab=auditing&userid=<%=user.getId() %>"
-							class="list-group-item <%=tab.equals("auditing")?"active":"" %>">
-							物品审核</a>
-							<%}%>
-							<a href="user/personal.jsp?tab=mess&userid=<%=user.getId() %>" 
-							class="list-group-item <%=tab.equals("mess")?"active":"" %>">
-							站内消息</a>
-							<a href="user/personal.jsp?tab=shopcart&userid=<%=user.getId() %>"
-							class="list-group-item <%=tab.equals("shopcart")?"active":"" %>">
-							购物车</a>
-							<a href="user/personal.jsp?tab=history&userid=<%=user.getId() %>"
-							class="list-group-item <%=tab.equals("history")?"active":"" %>">
-							购买历史</a>
-							<a href="user/personal.jsp?tab=pushed&userid=<%=user.getId() %>"
-                            class="list-group-item <%=tab.equals("pushed")?"active":"" %>">
-                                                        我发布的</a>
-							<a href="user/personal.jsp?tab=push&userid=<%=user.getId() %>"
-							class="list-group-item <%=tab.equals("push")?"active":"" %>">
-							发布商品</a>
-							<a href="user/personal.jsp?tab=like&pn=1&userid=<%=user.getId() %>"
-							class="list-group-item <%=tab.equals("like")?"active":"" %>">
-							收藏夹 </a>
-							<!-- 并不需要设置页 
-							<a href="user/personal.jsp?tab=setting&userid=<%=user.getId() %>" 
-							class="list-group-item <%=tab.equals("setting")?"active":"" %>">
-							设置</a>
-							-->
-							<%}else{%>
-							<a href="user/personal.jsp?tab=pushed&userid=<%=user.getId() %>"
-                            class="list-group-item <%=tab.equals("pushed")?"active":"" %>">
-                                                        他发布的商品</a>
-							<%}%>
+							<% String flag = (String) request.getAttribute("flag"); %>
+							<a href="/showPersonal.action?flag=personalMSSG" class="list-group-item <%=flag.equals("personalMSSG")?"active":"" %>">个人信息</a>
+							<a href="/showPersonal.action?flag=correspondMSSG" class="list-group-item <%=flag.equals("correspondMSSG")?"active":"" %>">站内消息</a>
+							<a href="/showPersonal.action?flag=releaseGoods" class="list-group-item <%=flag.equals("releaseGoods")?"active":"" %>">发布商品</a>
+							<a href="/showPersonal.action?flag=myRelaaseGoodsInfo" class="list-group-item <%=flag.equals("myRelaaseGoodsInfo")?"active":"" %>">我的商品</a>
+							<a href="/showPersonal.action?flag=myCollectGoodsInfo" class="list-group-item <%=flag.equals("myCollectGoodsInfo")?"active":"" %>">收藏夹 </a>
 						</div>
 					</div>
 				</div>
 			</div>
 				<div class="col-md-8">
-				<%if(tab.equals("push")){%>
+				<%if(flag.equals("releaseGoods")){%>
 				<jsp:include page="../site/personal/push.jsp" />
-				<%}else if(tab.equals("info")){%>
+				<%}else if(flag.equals("personalMSSG")){%>
 				<jsp:include page="../site/personal/info.jsp" />
-				<%}else if(tab.equals("auditing")){%>
-				<jsp:include page="../site/personal/auditing.jsp" />
-				<%}else if(tab.equals("shopcart")){%>
-				<jsp:include page="../site/personal/shopcart.jsp" />
-				<%}else if(tab.equals("like")){%>
+				<%}else if(flag.equals("myCollectGoodsInfo")){%>
 				<jsp:include page="../site/personal/like.jsp" />
-				<%}else if(tab.equals("mess")){%>
+				<%}else if(flag.equals("correspondMSSG")){%>
                 <jsp:include page="../site/personal/mess.jsp" />
-                <%}else if(tab.equals("pushed")){%>
+                <%}else if(flag.equals("myRelaaseGoodsInfo")){%>
                 <jsp:include page="../site/personal/pushed.jsp" />
-				<%}else if(tab.equals("history")){%>
-				<jsp:include page="../site/personal/history.jsp" />
 				<%}%>
 		</div>
 	</div>
 	</div>
-	<jsp:include page="../site/footer.jsp" />
+	<%--<!-- <jsp:include page="../site" /> -->--%>
 </body>
 </html>

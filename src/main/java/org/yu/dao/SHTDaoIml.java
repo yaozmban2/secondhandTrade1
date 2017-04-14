@@ -55,4 +55,6 @@ public interface SHTDaoIml {
      *   @Date:2017-04-13
     */
     void insertUser(UserEntity user);
+
+    Integer selectMessageCount(UserEntity user);
 }

@@ -33,30 +33,21 @@
 
 		<ul class="nav navbar-nav navbar-right">
 
-			<li><a href="user/personal.jsp?tab=shopcart&userid=">购物车(<span style="color: #d00;"
-					id="goodsNum"></span>)</a></li>
-			<li><a href="user/personal.jsp?tab=mess&userid=">消息(<span id="mess-number" style="color: #e00;"
-					id="messNum"></span>)</a></li>
-			<li class="dropdown"><a href="javascript:void(0)"
-				class="dropdown-toggle" data-toggle="dropdown" role="button"
-				aria-haspopup="true" aria-expanded="false"><span
-					class="caret"></span> </a>
-				<%--<ul class="dropdown-menu">--%>
-					<%--<li><a href="<%=basePath %>user/personal.jsp?userid=<%=user.getId()%>&tab=info">个人中心</a></li>--%>
-					<%--<%if(LoginVerify.isAdmin(request)){%>--%>
-					<%--<li><a href="<%=basePath %>user/personal.jsp?userid=<%=user.getId()%>&tab=auditing">物品审核</a></li>--%>
-					<%--<%}%>--%>
-					<%--<li><a href="<%=basePath %>user/personal.jsp?userid=<%=user.getId()%>&tab=history">购买历史</a></li>--%>
-					<%--<li><a href="<%=basePath %>user/personal.jsp?userid=<%=user.getId()%>&tab=push">发布物品</a></li>--%>
-					<%--<li><a href="<%=basePath %>user/personal.jsp?userid=<%=user.getId()%>&tab=like">收藏夹</a></li>--%>
-					<%--<!-- 并不需要设置页 --%>
-					<%--<li><a href="<%=basePath %>user/personal.jsp?userid=<%=user.getId()%>&tab=setting">设置</a></li>--%>
-					<%---->--%>
-					<%--<li><a href="<%=basePath %>ExitLoginServlet">退出登录</a></li>--%>
-				<%--</ul>--%>
+			<% String str = (String) request.getAttribute("aotuLogin"); if("true".equals(str)) { %>
+			<li><a href="/showPersonal.action?flag=correspondMSSG">消息(<span id="mess-number" style="color: #e00;" id="messNum">${messCount}</span>)</a></li>
+			<li class="dropdown"><a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+				${user.email}<span class="caret"></span> </a>
+				<ul class="dropdown-menu">
+					<li><a href="/showPersonal.action?flag=personalMSSG">个人中心</a></li>
+					<li><a href="/showPersonal.action?flag=releaseGoods">发布物品</a></li>
+					<li><a href="/showPersonal.action?flag=myCollectGoodsInfo">收藏夹</a></li>
+					<li><a href="/logout.action">退出登录</a></li>
+				</ul>
 			</li>
+			<% } else {%>
 			<li><a href="/user/login.jsp">登录</a></li>
 			<li><a href="/user/register.jsp">注册</a></li>
+			<% } %>
 		</ul>
 	</div>
 	<!-- /.navbar-collapse -->

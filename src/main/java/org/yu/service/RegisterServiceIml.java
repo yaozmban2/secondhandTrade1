@@ -6,6 +6,7 @@ import org.yu.entity.UserEntity;
 import org.yu.serviceIml.RegisterService;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 
 /**
  * @Author:俞竞雄
@@ -64,5 +65,10 @@ public class RegisterServiceIml implements RegisterService {
 
         shtDao.insertUser(user);
 
+    }
+
+    public void setAutoLogin(UserEntity user, HttpSession session) {
+
+        session.setAttribute("user", user);
     }
 }

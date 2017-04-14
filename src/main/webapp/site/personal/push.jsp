@@ -1,52 +1,43 @@
 <%/*
 商品发布页，被/personal.jsp包含
 */%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8" isThreadSafe="false"%>
-<%
-    String path = request.getContextPath();
-	String servletPath=path+"/GoodsCheckServlet";
-    String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
-%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" isThreadSafe="false"%>
+
 <div class="panel panel-info">
 	<div class="panel-heading">
-		<%
-	out.println("发布新物品");
-%>
+		发布商品
 	</div>
 	<div class="panel-body">
 
-		<form action="<%=servletPath%>" method="post"
-			enctype="multipart/form-data">
+		<form action="" method="post" enctype="multipart/form-data">
 
-			<%
-if(request.getParameter("info")!=null && !request.getParameter("info").equals("")){%>
+			<%--<% if(request.getParameter("info")!=null && !request.getParameter("info").equals("")){%>--%>
 			<div class="alert alert-success" role="alert">
-				<%out.print(new String(request.getParameter("info").getBytes("UTF-8"),"UTF-8"));%>
+				商品发布<%--<%out.print(new String(request.getParameter("info").getBytes("UTF-8"),"UTF-8"));%>--%>
 			</div>
-			<%}%>
-			<%
- if(request.getParameter("seccess")!=null && request.getParameter("seccess").equals("0") && request.getAttribute("isCheck")!=null){%>
+			<%--<%}%>--%>
+			<%--<% if(request.getParameter("seccess")!=null && request.getParameter("seccess").equals("0") && request.getAttribute("isCheck")!=null){%>--%>
 			<div class="alert alert-danger" role="alert">
-				<%
- if(request.getAttribute("nameCheck")!=null&&!request.getAttribute("nameCheck").equals("")){
-	 out.print(request.getAttribute("nameCheck"));
+				<%--<%
+					 if(request.getAttribute("nameCheck")!=null&&!request.getAttribute("nameCheck").equals("")){
+						 out.print(request.getAttribute("nameCheck"));
 
-	 
- };if(request.getAttribute("quantityCheck")!=null&&!request.getAttribute("quantityCheck").equals("")){
-	 out.print(request.getAttribute("quantityCheck"));
-	 
- }if(request.getAttribute("contentCheck")!=null&&!request.getAttribute("contentCheck").equals("")){
-	 out.print(request.getAttribute("contentCheck"));
-	 
- }
- if(request.getAttribute("fileCheck")!=null&&!request.getAttribute("fileCheck").equals("")){
-	 out.print(request.getAttribute("fileCheck"));
-	 
- }
- %>
+
+					 };if(request.getAttribute("quantityCheck")!=null&&!request.getAttribute("quantityCheck").equals("")){
+						 out.print(request.getAttribute("quantityCheck"));
+
+					 }if(request.getAttribute("contentCheck")!=null&&!request.getAttribute("contentCheck").equals("")){
+						 out.print(request.getAttribute("contentCheck"));
+
+					 }
+					 if(request.getAttribute("fileCheck")!=null&&!request.getAttribute("fileCheck").equals("")){
+						 out.print(request.getAttribute("fileCheck"));
+
+					 }
+				 %>--%>
+				名字检查
 			</div>
-			<% }%>
+			<%--<% }%>--%>
 			<div class="form-group">
 				<p>物品名称：</p>
 				<input class="form-control" name="name-goods">
