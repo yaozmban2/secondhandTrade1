@@ -28,6 +28,7 @@
 <%--%>--%>
 	<div class="container">
 		<form class="form-signin" action="/login.action" Method="Post">
+			<h8 class="form-signin-heading">${changePresonalPWDScucess}</h8>
 			<h2 class="form-signin-heading">登录网站</h2>
 			<label for="inputEmail" class="sr-only">Email address</label>
 			<input type="email" id="inputEmail" class="form-control" name="inputEmail" placeholder="邮箱地址" required autofocus>

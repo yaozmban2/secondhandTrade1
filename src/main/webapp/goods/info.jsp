@@ -156,9 +156,6 @@ if(isLogin){
 								<button id="collectButton" onclick="collect()" type="button" class="center-block btn btn-default">收藏此物品</button>
 							</div>
 							<div class="col-md-4">
-								<button type="button" id="addCastButton"
-									class="center-block btn btn-default"
-									onclick="">加入购物车</button>
 							</div>
 							<div class="col-md-4">
 								<button  id="buy" type="button" class="center-block btn btn-default" onclick="toLogin()">

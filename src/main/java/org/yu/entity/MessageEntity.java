@@ -2,9 +2,12 @@ package org.yu.entity;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.Date;
 
 /**
- * Created by Administrator on 2017/4/11.
+ * @Author:俞竞雄
+ * @Description:
+ * @Date: ${date}
  */
 @Entity
 @Table(name = "message", schema = "secondhandtrade", catalog = "")
@@ -12,12 +15,12 @@ public class MessageEntity {
     private int messFromId;
     private int messToId;
     private String messText;
-    private Timestamp sendTime;
+    private Date sendTime;
     private int messId;
     private Integer messType;
 
     @Basic
-    @Column(name = "mess_from_id")
+    @Column(name = "mess_from_id", nullable = false)
     public int getMessFromId() {
         return messFromId;
     }
@@ -27,7 +30,7 @@ public class MessageEntity {
     }
 
     @Basic
-    @Column(name = "mess_to_id")
+    @Column(name = "mess_to_id", nullable = false)
     public int getMessToId() {
         return messToId;
     }
@@ -37,7 +40,7 @@ public class MessageEntity {
     }
 
     @Basic
-    @Column(name = "mess_text")
+    @Column(name = "mess_text", nullable = false, length = 255)
     public String getMessText() {
         return messText;
     }
@@ -47,17 +50,17 @@ public class MessageEntity {
     }
 
     @Basic
-    @Column(name = "send_time")
-    public Timestamp getSendTime() {
+    @Column(name = "send_time", nullable = false)
+    public Date getSendTime() {
         return sendTime;
     }
 
-    public void setSendTime(Timestamp sendTime) {
+    public void setSendTime(Date sendTime) {
         this.sendTime = sendTime;
     }
 
     @Id
-    @Column(name = "mess_id")
+    @Column(name = "mess_id", nullable = false)
     public int getMessId() {
         return messId;
     }
@@ -67,7 +70,7 @@ public class MessageEntity {
     }
 
     @Basic
-    @Column(name = "mess_type")
+    @Column(name = "mess_type", nullable = true)
     public Integer getMessType() {
         return messType;
     }

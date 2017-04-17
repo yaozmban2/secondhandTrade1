@@ -7,6 +7,7 @@ import org.yu.service.LogoutServiceIml;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * @Author:俞竞雄
@@ -20,7 +21,7 @@ public class LogoutController {
     private LogoutServiceIml logoutServiceIml;
 
     @RequestMapping("/logout.action")
-    public ModelAndView logout(HttpServletRequest request) {
+    public ModelAndView logout(HttpServletRequest request, HttpServletResponse response) {
         /**
          *   @Description:  账号登出操作
          *   @Author:俞竞雄
@@ -32,7 +33,7 @@ public class LogoutController {
         ModelAndView modelAndView = new ModelAndView();
 
         //清除Cookie和session
-        logoutServiceIml.quitAutoLogin(request);
+        logoutServiceIml.quitAutoLogin(request, response);
 
         modelAndView.setViewName("redirect:/indexController.action?ceta=0");
 

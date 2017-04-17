@@ -1,6 +1,7 @@
 package org.yu.serviceIml;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * @Author:俞竞雄
@@ -16,5 +17,5 @@ public interface LogoutService {
      *   @return:
      *   @Date:2017-04-14   
     */
-    void quitAutoLogin(HttpServletRequest request);
+    void quitAutoLogin(HttpServletRequest request, HttpServletResponse response);
 }

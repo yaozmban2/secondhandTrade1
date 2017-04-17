@@ -45,21 +45,17 @@ public class LoginController {
         if(!request.getSession().getAttribute("validateCode").equals(validateCode))
         {
             modelAndView.addObject("validateCodeResult", "验证码错误");
-            modelAndView.addObject("loginReult", "");
             viewName = "/user/login";
         }
         //验证用户输入的email和密码是否正确
         else if(!loginServiceIml.login(inputEamil, inputPWD, request.getSession()))
         {
-            modelAndView.addObject("validateCodeResult", "");
             modelAndView.addObject("loginReult", "E-mail或密码错误");
             viewName = "/user/login";
         }
         //验证通过
         else
         {
-            modelAndView.addObject("validateCodeResult", "");
-            modelAndView.addObject("loginReult", "");
             viewName = "redirect:/indexController.action?ceta=0";
             //判断用户是否选择了自动登录
             if(request.getParameterValues("auto_login") != null)

@@ -40,25 +40,25 @@
 			<%--<% }%>--%>
 			<div class="form-group">
 				<p>物品名称：</p>
-				<input class="form-control" name="name-goods">
+				<input class="form-control" name="name">
 			</div>
 			<div class="form-group">
 				<p>价格(元)：</p>
-				<input type="number" class="form-control" name="quantity-goods">
+				<input type="number" class="form-control" name="price">
 			</div>
 			<div class="form-group">
 				<p>物品简介：</p>
-				<textarea rows="3" class="form-control" name="content-goods"></textarea>
+				<textarea rows="3" class="form-control" name="content"></textarea>
 			</div>
 			<div class="form-group">
 				<p>选择一个分类：</p>
-				<select name="type_id-goods" class="form-control">
-					<option value="book">书籍</option>
-					<option value="live">生活出行</option>
-					<option value="clothes">衣服鞋包</option>
-					<option value="eletronic">电子产品</option>
-					<option value="sport">体育运动</option>
-					<option value="other">其他</option>
+				<select name="typeId" class="form-control">
+					<option value="1">书籍</option>
+					<option value="2">生活出行</option>
+					<option value="3">衣服鞋包</option>
+					<option value="4">电子产品</option>
+					<option value="5">体育运动</option>
+					<option value="6">其他</option>
 				</select>
 			</div>
 			<div class="form-group">

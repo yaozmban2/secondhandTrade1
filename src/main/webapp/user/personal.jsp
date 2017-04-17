@@ -42,13 +42,13 @@ String tab = request.getParameter("tab");
 					<div class="col-md-12">
 						<div class="list-group">
 							<div class="list-group-item personal-main-info">
-								<img class="img-rounded img-personal-main-info" src="/static/user_img/1" />
+								<img class="img-rounded img-personal-main-info" src="/pic${user.img}" />
 								<div class="row detail-goods text-muted">姓名：${user.name}</div>
 								<div class="row detail-goods text-muted">邮箱：${user.email}</div>
 							</div>
 							<% String flag = (String) request.getAttribute("flag"); %>
 							<a href="/showPersonal.action?flag=personalMSSG" class="list-group-item <%=flag.equals("personalMSSG")?"active":"" %>">个人信息</a>
-							<a href="/showPersonal.action?flag=correspondMSSG" class="list-group-item <%=flag.equals("correspondMSSG")?"active":"" %>">站内消息</a>
+							<a href="/showMessageInfo.action" class="list-group-item <%=flag.equals("correspondMSSG")?"active":"" %>">站内消息</a>
 							<a href="/showPersonal.action?flag=releaseGoods" class="list-group-item <%=flag.equals("releaseGoods")?"active":"" %>">发布商品</a>
 							<a href="/showPersonal.action?flag=myRelaaseGoodsInfo" class="list-group-item <%=flag.equals("myRelaaseGoodsInfo")?"active":"" %>">我的商品</a>
 							<a href="/showPersonal.action?flag=myCollectGoodsInfo" class="list-group-item <%=flag.equals("myCollectGoodsInfo")?"active":"" %>">收藏夹 </a>

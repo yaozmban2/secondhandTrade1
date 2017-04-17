@@ -1,22 +1,22 @@
 package org.yu.entity;
 
 import javax.persistence.*;
-import java.sql.Timestamp;
 
 /**
- * Created by Administrator on 2017/4/11.
+ * @Author:俞竞雄
+ * @Description:
+ * @Date: ${date}
  */
 @Entity
-@Table(name = "order", schema = "secondhandtrade", catalog = "")
-public class OrderEntity {
+@Table(name = "shoppingcart", schema = "secondhandtrade", catalog = "")
+public class ShoppingcartEntity {
     private int id;
     private int goodsId;
     private int userId;
-    private Timestamp date;
-    private String message;
 
     @Id
-    @Column(name = "id")
+    @Basic
+    @Column(name = "id", nullable = false)
     public int getId() {
         return id;
     }
@@ -26,7 +26,7 @@ public class OrderEntity {
     }
 
     @Basic
-    @Column(name = "goods_id")
+    @Column(name = "goodsId", nullable = false)
     public int getGoodsId() {
         return goodsId;
     }
@@ -36,7 +36,7 @@ public class OrderEntity {
     }
 
     @Basic
-    @Column(name = "user_id")
+    @Column(name = "userId", nullable = false)
     public int getUserId() {
         return userId;
     }
@@ -45,38 +45,16 @@ public class OrderEntity {
         this.userId = userId;
     }
 
-    @Basic
-    @Column(name = "date")
-    public Timestamp getDate() {
-        return date;
-    }
-
-    public void setDate(Timestamp date) {
-        this.date = date;
-    }
-
-    @Basic
-    @Column(name = "message")
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        OrderEntity that = (OrderEntity) o;
+        ShoppingcartEntity that = (ShoppingcartEntity) o;
 
         if (id != that.id) return false;
         if (goodsId != that.goodsId) return false;
         if (userId != that.userId) return false;
-        if (date != null ? !date.equals(that.date) : that.date != null) return false;
-        if (message != null ? !message.equals(that.message) : that.message != null) return false;
 
         return true;
     }
@@ -86,8 +64,6 @@ public class OrderEntity {
         int result = id;
         result = 31 * result + goodsId;
         result = 31 * result + userId;
-        result = 31 * result + (date != null ? date.hashCode() : 0);
-        result = 31 * result + (message != null ? message.hashCode() : 0);
         return result;
     }
 }

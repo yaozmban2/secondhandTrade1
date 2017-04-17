@@ -54,11 +54,11 @@ public class LoginInterceptor implements HandlerInterceptor {
             loginUser = (UserEntity) request.getSession().getAttribute("user");
 
             //session中还有用户信息，没有注销的情况下
-            if(loginUser != null)
-            {
+            if (loginUser != null) {
                 modelAndView.addObject("messCount", loginServiceIml.selectMessageCount(request.getSession()));
                 modelAndView.addObject("aotuLogin", "true");
             }
+        }
             //session中没有用户信息（可能用户登录被注销，可能用户的session超过时间被注销）
             else
             {
@@ -91,8 +91,6 @@ public class LoginInterceptor implements HandlerInterceptor {
                     }
                 }
             }
-        }
-
     }
 
     public void afterCompletion(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o, Exception e) throws Exception {

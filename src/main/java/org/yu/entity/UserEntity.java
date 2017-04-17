@@ -3,7 +3,9 @@ package org.yu.entity;
 import javax.persistence.*;
 
 /**
- * Created by Administrator on 2017/4/11.
+ * @Author:俞竞雄
+ * @Description:
+ * @Date: ${date}
  */
 @Entity
 @Table(name = "user", schema = "secondhandtrade", catalog = "")
@@ -19,7 +21,7 @@ public class UserEntity {
     private int messNum;
 
     @Basic
-    @Column(name = "img")
+    @Column(name = "img", nullable = true, length = 255)
     public String getImg() {
         return img;
     }
@@ -29,7 +31,7 @@ public class UserEntity {
     }
 
     @Id
-    @Column(name = "id")
+    @Column(name = "id", nullable = false)
     public int getId() {
         return id;
     }
@@ -39,7 +41,7 @@ public class UserEntity {
     }
 
     @Basic
-    @Column(name = "email")
+    @Column(name = "email", nullable = false, length = 255)
     public String getEmail() {
         return email;
     }
@@ -49,7 +51,7 @@ public class UserEntity {
     }
 
     @Basic
-    @Column(name = "pwd")
+    @Column(name = "pwd", nullable = false, length = 255)
     public String getPwd() {
         return pwd;
     }
@@ -59,7 +61,7 @@ public class UserEntity {
     }
 
     @Basic
-    @Column(name = "name")
+    @Column(name = "name", nullable = true, length = 255)
     public String getName() {
         return name;
     }
@@ -69,7 +71,7 @@ public class UserEntity {
     }
 
     @Basic
-    @Column(name = "stu_num")
+    @Column(name = "stu_num", nullable = true, length = 255)
     public String getStuNum() {
         return stuNum;
     }
@@ -79,7 +81,7 @@ public class UserEntity {
     }
 
     @Basic
-    @Column(name = "qq")
+    @Column(name = "qq", nullable = true, length = 255)
     public String getQq() {
         return qq;
     }
@@ -89,7 +91,7 @@ public class UserEntity {
     }
 
     @Basic
-    @Column(name = "phone")
+    @Column(name = "phone", nullable = true, length = 255)
     public String getPhone() {
         return phone;
     }
@@ -99,7 +101,7 @@ public class UserEntity {
     }
 
     @Basic
-    @Column(name = "mess_num")
+    @Column(name = "mess_num", nullable = false)
     public int getMessNum() {
         return messNum;
     }

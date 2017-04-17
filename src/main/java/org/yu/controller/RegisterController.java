@@ -40,51 +40,32 @@ public class RegisterController {
         //判断密码合法性
         if(!registerService.validatePwd(register_user.getPwd()))
         {
-            modelAndView.addObject("validateCodeResult","");
-            modelAndView.addObject("emailReult","");
-            modelAndView.addObject("pwdValidateResult","");
             modelAndView.addObject("pwdResult","密码过短");
-            modelAndView.addObject("nameResult","");
             viewName = "/user/register";
         }
         //判断名字输入的合法性
         else if(register_user.getName().equals(""))
         {
-            modelAndView.addObject("validateCodeResult","");
-            modelAndView.addObject("emailReult","");
-            modelAndView.addObject("pwdValidateResult","");
-            modelAndView.addObject("pwdResult","");
+
             modelAndView.addObject("nameResult","请输入名字");
             viewName = "/user/register";
         }
         //两次密码输入是否一致
         else if(!registerService.validateTwicePwd(register_user.getPwd(), validatePwd))
         {
-            modelAndView.addObject("validateCodeResult","");
-            modelAndView.addObject("emailReult","");
             modelAndView.addObject("pwdValidateResult","两次密码输入不同");
-            modelAndView.addObject("pwdResult","");
-            modelAndView.addObject("nameResult","");
             viewName = "/user/register";
         }
         //验证码是否正确
         else if(!registerService.validateCode((String) request.getSession().getAttribute("validateCode"), inputCode))
         {
             modelAndView.addObject("validateCodeResult","请输入正确的验证码");
-            modelAndView.addObject("emailReult","");
-            modelAndView.addObject("pwdValidateResult","");
-            modelAndView.addObject("pwdResult","");
-            modelAndView.addObject("nameResult","");
             viewName = "/user/register";
         }
         //email是否被占用
         else if(registerService.validateEmail(register_user))
         {
-            modelAndView.addObject("validateCodeResult","");
             modelAndView.addObject("emailReult","该email已经注册");
-            modelAndView.addObject("pwdValidateResult","");
-            modelAndView.addObject("pwdResult","");
-            modelAndView.addObject("nameResult","");
             viewName = "/user/register";
         }
         //验证全部通过，将user的信息放到数据库中,加到session中直接登录

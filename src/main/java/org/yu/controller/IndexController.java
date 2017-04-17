@@ -8,6 +8,7 @@ import org.yu.entity.GoodsEntity;
 import org.yu.service.IndexServiceIml;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -23,7 +24,7 @@ public class IndexController  {
     private IndexServiceIml indexServiceIml;
 
     @RequestMapping("/indexController.action")
-    public ModelAndView showItem(@RequestParam(value="ceta")int ceta) throws Exception {
+    public ModelAndView showItem(@RequestParam(value="ceta")int ceta, HttpServletRequest request) throws Exception {
             /**
             *   @Description: 根据商品类型ID显示主页信息
             *   @Author:俞竞雄

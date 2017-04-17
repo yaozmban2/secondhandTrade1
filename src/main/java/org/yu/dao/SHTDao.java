@@ -4,6 +4,7 @@ import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
@@ -40,8 +41,8 @@ public class SHTDao implements SHTDaoIml {
         List<GoodsEntity> list = new ArrayList<GoodsEntity>();
         try{
             session = sessionFactory.openSession();
-            transaction = session.beginTransaction();
 
+            transaction = session.beginTransaction();
             Criteria criteria = session.createCriteria(GoodsEntity.class);
             criteria.add(Restrictions.eq("typeId", goodsType));
 
@@ -125,6 +126,30 @@ public class SHTDao implements SHTDaoIml {
         return userEntity;
     }
 
+    public UserEntity selectUserById(Integer userID) {
+
+        Transaction transaction = null;
+        Session session = null;
+        UserEntity userEntity = null;
+
+        try{
+            session = sessionFactory.openSession();
+            transaction = session.beginTransaction();
+
+            Criteria criteria = session.createCriteria(UserEntity.class);
+            criteria.add(Restrictions.eq("id", userID));
+            userEntity = (UserEntity) criteria.uniqueResult();
+
+            transaction.commit();
+        }catch (Exception e){
+            transaction.rollback();
+        }finally {
+            session.close();
+        }
+
+        return userEntity;
+    }
+
     public void insertUser(UserEntity user){
 
         Transaction transaction = null;
@@ -151,6 +176,25 @@ public class SHTDao implements SHTDaoIml {
         }
     }
 
+    public void insertMessage(MessageEntity messageEntity) {
+
+        Transaction transaction = null;
+        Session session = null;
+
+        try{
+            session = sessionFactory.openSession();
+            transaction = session.beginTransaction();
+
+            session.save(messageEntity);
+
+            transaction.commit();
+        }catch (Exception e){
+            transaction.rollback();
+        }finally {
+            session.close();
+        }
+    }
+
     public Integer selectMessageCount(UserEntity user) {
 
         Transaction transaction = null;
@@ -162,6 +206,7 @@ public class SHTDao implements SHTDaoIml {
             transaction = session.beginTransaction();
 
             Criteria criteria = session.createCriteria(MessageEntity.class);
+            criteria.add(Restrictions.eq("messToId", user.getId()));
             criteria.setProjection(Projections.rowCount());
             Object obj = criteria.uniqueResult();
 
@@ -176,5 +221,56 @@ public class SHTDao implements SHTDaoIml {
         }
 
         return messCount;
+    }
+
+    public void updateUser(UserEntity user) {
+        Transaction transaction = null;
+        Session session = null;
+
+        try{
+            session = sessionFactory.openSession();
+            transaction = session.beginTransaction();
+
+            session.update(user);
+
+            transaction.commit();
+        }catch (Exception e){
+            transaction.rollback();
+        }finally {
+            session.close();
+        }
+
+    }
+
+    public List<MessageEntity> selectMessageInfo(Integer messToId, Integer pageNum) {
+
+        List<MessageEntity> list = null;
+        Transaction transaction = null;
+        Session session = null;
+
+        try{
+            session = sessionFactory.openSession();
+            transaction = session.beginTransaction();
+
+            Criteria criteria = session.createCriteria(MessageEntity.class);
+            //设置按messToTd=收信用户ID进行条件查询
+            criteria.add(Restrictions.eq("messToId", messToId));
+            //设置按升序查询
+            criteria.addOrder(Order.asc("messFromId"));
+            //设置开始位置：(当前页 - 1) * 每页记录数
+            criteria.setFirstResult((pageNum - 1) * 5);
+            //每页显示记录数
+            criteria.setMaxResults(5);
+            //查询数据库
+            list = criteria.list();
+
+            transaction.commit();
+        }catch (Exception e){
+            transaction.rollback();
+        }finally {
+            session.close();
+        }
+
+        return list;
     }
 }

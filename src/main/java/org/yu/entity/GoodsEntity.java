@@ -1,12 +1,13 @@
 package org.yu.entity;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
 import java.util.Date;
 
 /**
  * @Author:俞竞雄
  * @Description:
- * @Date: $date$
+ * @Date: ${date}
  */
 @Entity
 @Table(name = "goods", schema = "secondhandtrade", catalog = "")
@@ -22,9 +23,11 @@ public class GoodsEntity {
     private int producterId;
     private Date createDate;
     private String userName;
+    private String deliveryType;
+    private Integer collectionNum;
 
     @Id
-    @Column(name = "id")
+    @Column(name = "id", nullable = false)
     public int getId() {
         return id;
     }
@@ -34,7 +37,7 @@ public class GoodsEntity {
     }
 
     @Basic
-    @Column(name = "image")
+    @Column(name = "image", nullable = false, length = 255)
     public String getImage() {
         return image;
     }
@@ -44,7 +47,7 @@ public class GoodsEntity {
     }
 
     @Basic
-    @Column(name = "type_id")
+    @Column(name = "type_id", nullable = false)
     public int getTypeId() {
         return typeId;
     }
@@ -54,7 +57,7 @@ public class GoodsEntity {
     }
 
     @Basic
-    @Column(name = "name")
+    @Column(name = "name", nullable = false, length = 255)
     public String getName() {
         return name;
     }
@@ -64,7 +67,7 @@ public class GoodsEntity {
     }
 
     @Basic
-    @Column(name = "num")
+    @Column(name = "num", nullable = true)
     public Integer getNum() {
         return num;
     }
@@ -74,7 +77,7 @@ public class GoodsEntity {
     }
 
     @Basic
-    @Column(name = "price")
+    @Column(name = "price", nullable = false, precision = 0)
     public double getPrice() {
         return price;
     }
@@ -84,7 +87,7 @@ public class GoodsEntity {
     }
 
     @Basic
-    @Column(name = "status")
+    @Column(name = "status", nullable = false)
     public int getStatus() {
         return status;
     }
@@ -94,7 +97,7 @@ public class GoodsEntity {
     }
 
     @Basic
-    @Column(name = "content")
+    @Column(name = "content", nullable = false, length = 255)
     public String getContent() {
         return content;
     }
@@ -104,7 +107,7 @@ public class GoodsEntity {
     }
 
     @Basic
-    @Column(name = "producter_id")
+    @Column(name = "producter_id", nullable = false)
     public int getProducterId() {
         return producterId;
     }
@@ -114,7 +117,7 @@ public class GoodsEntity {
     }
 
     @Basic
-    @Column(name = "create_date")
+    @Column(name = "create_date", nullable = false)
     public Date getCreateDate() {
         return createDate;
     }
@@ -124,7 +127,7 @@ public class GoodsEntity {
     }
 
     @Basic
-    @Column(name = "user_name")
+    @Column(name = "user_name", nullable = false, length = 255)
     public String getUserName() {
         return userName;
     }
@@ -172,5 +175,25 @@ public class GoodsEntity {
         result = 31 * result + (createDate != null ? createDate.hashCode() : 0);
         result = 31 * result + (userName != null ? userName.hashCode() : 0);
         return result;
+    }
+
+    @Basic
+    @Column(name = "delivery_type", nullable = true, length = 45)
+    public String getDeliveryType() {
+        return deliveryType;
+    }
+
+    public void setDeliveryType(String deliveryType) {
+        this.deliveryType = deliveryType;
+    }
+
+    @Basic
+    @Column(name = "collection_num", nullable = true)
+    public Integer getCollectionNum() {
+        return collectionNum;
+    }
+
+    public void setCollectionNum(Integer collectionNum) {
+        this.collectionNum = collectionNum;
     }
 }
