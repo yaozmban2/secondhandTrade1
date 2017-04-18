@@ -66,14 +66,30 @@ public interface SHTDaoIml {
     */
     void insertUser(UserEntity user);
 
+    /**
+     *   @Description: 插入消息
+     *   @Author:俞竞雄
+     *   @Param:[messageEntity] 要插入的消息
+     *   @return:
+     *   @Date:2017-04-13
+     */
     void insertMessage(MessageEntity messageEntity);
+
+    /**
+     *   @Description: 插入商品信息
+     *   @Author:俞竞雄
+     *   @Param:[goods] 要插入的商品
+     *   @return:
+     *   @Date:2017-04-13
+     */
+    void insertGoods(GoodsEntity goods);
 
     Integer selectMessageCount(UserEntity user);
 
     void updateUser(UserEntity user);
 
     /**
-     *   @Description:           根据用户id查询分页查询给该用户的消息
+     *   @Description:           根据用户id分页查询给该用户的消息
      *   @Author:俞竞雄
      *   @Param:[messToId]      用户id
      *   @Param:[pageNum]       哪几个页面
@@ -81,4 +97,14 @@ public interface SHTDaoIml {
      *   @Date:2017-04-16
     */
     List<MessageEntity> selectMessageInfo(Integer messToId, Integer pageNum);
+
+    /**
+     *   @Description:           根据用户id分页查询给该用户发布的商品
+     *   @Author:俞竞雄
+     *   @Param:[productID]      发布的用户ID
+     *   @Param:[pageNum]        分页哪几个页面
+     *   @return:[List<GoodsEntity>]   返回用户发布商品列表
+     *   @Date:2017-04-16
+     */
+    List<GoodsEntity> selectMyRealseGoodsInfo(Integer productID, Integer pageNum);
 }

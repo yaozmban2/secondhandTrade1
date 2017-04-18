@@ -195,6 +195,25 @@ public class SHTDao implements SHTDaoIml {
         }
     }
 
+    public void insertGoods(GoodsEntity goods) {
+
+        Transaction transaction = null;
+        Session session = null;
+
+        try{
+            session = sessionFactory.openSession();
+            transaction = session.beginTransaction();
+
+            session.save(goods);
+
+            transaction.commit();
+        }catch (Exception e){
+            transaction.rollback();
+        }finally {
+            session.close();
+        }
+    }
+
     public Integer selectMessageCount(UserEntity user) {
 
         Transaction transaction = null;
@@ -264,6 +283,35 @@ public class SHTDao implements SHTDaoIml {
             //查询数据库
             list = criteria.list();
 
+            transaction.commit();
+        }catch (Exception e){
+            transaction.rollback();
+        }finally {
+            session.close();
+        }
+
+        return list;
+    }
+
+    public List<GoodsEntity> selectMyRealseGoodsInfo(Integer productID, Integer pageNum) {
+        Transaction transaction = null;
+        Session session = null;
+        List<GoodsEntity> list = null;
+
+        try{
+            session = sessionFactory.openSession();
+
+            transaction = session.beginTransaction();
+            Criteria criteria = session.createCriteria(GoodsEntity.class);
+            //设置查询条件为商品创建者ID为用户ID
+            criteria.add(Restrictions.eq("producterId", productID));
+            //设置数据库按照商品状态ID升序查询
+            criteria.addOrder(Order.asc("status"));
+            //设置分页查询的第几页和每页显示数量
+            criteria.setFirstResult((pageNum - 1) * 5);
+            criteria.setMaxResults(5);
+
+            list = criteria.list();
             transaction.commit();
         }catch (Exception e){
             transaction.rollback();

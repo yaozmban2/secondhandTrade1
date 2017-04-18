@@ -30,6 +30,7 @@
 		<ul class="nav navbar-nav navbar-right">
 
 			<% String str = (String) request.getAttribute("aotuLogin"); if("true".equals(str)) { %>
+			<li><a href="/user/personal.jsp?flag=shoppingCart">购物车(<span style="color: #d00;" id="goodsNum">2</span>)</a></li>
 			<li><a href="/showMessageInfo.action">消息(<span id="mess-number" style="color: #e00;" id="messNum">${messCount}</span>)</a></li>
 			<li class="dropdown"><a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
 				${user.email}<span class="caret"></span> </a>

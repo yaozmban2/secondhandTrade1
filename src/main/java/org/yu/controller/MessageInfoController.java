@@ -26,6 +26,7 @@ public class MessageInfoController {
     public ModelAndView showMessageInfo(HttpServletRequest request) {
         ModelAndView modelAndView = new ModelAndView();
 
+        //设置查询页面为第一页
         Integer pageNum = 1;
 
         if (messageInfoServiceIml.showMessageInfo(request.getSession(), pageNum))
